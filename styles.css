@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  position: relative;
+  width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #e5ff1d;
+}
+.title {
+  font-size: 48px;
+  font-family: 'Lato', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+/* фильтрация */
+.filter__wrapper {
+  position: absolute;
+  width: 400px;
+  height: 60px;
+  /* border: 1px solid #91c9ff; */
+  right: 30px;
+  top: 67px;
+}
+.filter__wrapper__title {
+  font-size: 14px;
+  margin-left: 15px;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+.btn-2 {
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.btn-2:before {
+  content: '';
+  position: absolute;
+  height: 11px;
+  width: 100%;
+  background: #fff;
+  left: 0;
+  top: 0;
+  transition: all 0.3s;
+  opacity: 0.3;
+}
+
+.btn-2:hover:before {
+  top: 77%;
+}
+
+/* пагинация */
+.pagination {
+  position: absolute;
+  top: 70px;
+  left: 360px;
+}
+.pagination ul {
+  display: flex;
+  background: inherit;
+  padding: 8px;
+  justify-content: center;
+  border-radius: 50px;
+}
+.pagination ul li {
+  color: #20b2aa;
+  list-style: none;
+  line-height: 45px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.pagination ul li.numb {
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  margin: 0 3px;
+}
+.pagination ul li.dots {
+  font-size: 22px;
+  cursor: default;
+}
+.pagination ul li.btn {
+  padding: 0 20px;
+}
+.pagination ul li.prev {
+  border-radius: 25px 5px 5px 25px;
+}
+.pagination ul li.next {
+  border-radius: 5px 25px 25px 5px;
+}
+.pagination ul li.active,
+.pagination ul li.numb:hover,
+.pagination ul li.btn:hover {
+  color: #fff;
+  background: #20b2aa;
+}
+
+/* список */
+.ProductList {
+  margin: 90px 30px;
+  list-style: none;
+  font-size: 25px;
+}
+.ProductList__item {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+.item_id {
+  font-size: 15px;
+}
+.item_price {
+  color: rgb(0, 21, 255);
+  cursor: pointer;
+}
+.item_product {
+  color: rgb(155, 5, 210);
+  cursor: pointer;
+}
+.item_brand {
+  color: brown;
+  cursor: pointer;
+}
