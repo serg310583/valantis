@@ -386,11 +386,15 @@ async function getFieldName() {
       console.error(message);
     } else {
       const data = await response.json();
-      const productFieldName = data.result;
+      const productFieldName = data.result.sort();
+      const uniqProductFieldName = [...new Set(productFieldName)];
       clearList(productList);
       clearList(paginatonList);
-
       console.log(productFieldName);
+      console.log(uniqProductFieldName);
+      clearList(productList);
+      clearList(paginatonList);
+      renderListName(uniqProductFieldName);
     }
   } while (!response.ok);
 }
@@ -411,9 +415,15 @@ async function getFieldPrice() {
       console.error(message);
     } else {
       const data = await response.json();
-      const productFieldName = data.result;
-
-      console.log(productFieldName);
+      const productFieldPrice = data.result.sort(function (a, b) {
+        return a - b;
+      });
+      const uniqProductFieldPrice = [...new Set(productFieldPrice)];
+      console.log(productFieldPrice);
+      console.log(uniqProductFieldPrice);
+      clearList(productList);
+      clearList(paginatonList);
+      renderListPrice(uniqProductFieldPrice);
     }
   } while (!response.ok);
 }
@@ -434,9 +444,61 @@ async function getFieldBrand() {
       console.error(message);
     } else {
       const data = await response.json();
-      const productFieldName = data.result;
-
-      console.log(productFieldName);
+      const productFieldBrand = data.result.sort().filter(function (el) {
+        return el != null;
+      });
+      const uniqProductFieldBrand = [...new Set(productFieldBrand)];
+      console.log(productFieldBrand);
+      console.log(uniqProductFieldBrand);
+      clearList(productList);
+      clearList(paginatonList);
+      renderListBrand(uniqProductFieldBrand);
     }
   } while (!response.ok);
+}
+
+//----------------------------функция рендера списка наименований
+function renderListName(list) {
+  let ul = document.createElement('ul');
+
+  list.forEach(function (item) {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(item));
+    li.className = 'item_product';
+    li.addEventListener('click', function () {
+      filterByName(item);
+    });
+    ul.appendChild(li);
+  });
+  productList.appendChild(ul);
+}
+//----------------------------функция рендера списка цен
+function renderListPrice(list) {
+  let ul = document.createElement('ul');
+
+  list.forEach(function (item) {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(item));
+    li.className = 'item_price';
+    li.addEventListener('click', function () {
+      filterByPrice(item);
+    });
+    ul.appendChild(li);
+  });
+  productList.appendChild(ul);
+}
+//----------------------------функция рендера списка брэндов
+function renderListBrand(list) {
+  let ul = document.createElement('ul');
+
+  list.forEach(function (item) {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(item));
+    li.className = 'item_brand';
+    li.addEventListener('click', function () {
+      filterByBrand(item);
+    });
+    ul.appendChild(li);
+  });
+  productList.appendChild(ul);
 }

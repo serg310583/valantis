@@ -10,7 +10,7 @@
   width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
-  background: #e5ff1d;
+  background: #91c9ff;
 }
 .title {
   font-size: 48px;
@@ -132,12 +132,19 @@
 .item_price {
   color: rgb(0, 21, 255);
   cursor: pointer;
+  list-style: none;
 }
 .item_product {
   color: rgb(155, 5, 210);
   cursor: pointer;
+  list-style: none;
 }
 .item_brand {
   color: brown;
+  cursor: pointer;
+  list-style: none;
+}
+.listItem {
+  list-style: none;
   cursor: pointer;
 }
