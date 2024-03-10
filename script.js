@@ -8,16 +8,12 @@ const headersApi = {
   'Content-Type': 'application/json',
   'X-Auth': authHeader,
 };
-//тело запроса для получения всех ID
-const bodyApiAddAllIds = {
-  action: 'get_ids',
-};
 const productList = document.querySelector('.ProductList');
 const paginatonList = document.querySelector('.pagination');
-
 let totalPages;
 const pageCache = {};
 const productCache = {};
+
 //----------------получаем количество всего товара по ID---------------------------
 async function getAllIds() {
   let allIds;
@@ -28,14 +24,15 @@ async function getAllIds() {
     response = await fetch(url, {
       method: 'POST',
       headers: headersApi,
-      body: JSON.stringify(bodyApiAddAllIds),
+      body: JSON.stringify({
+        action: 'get_ids',
+      }),
     });
     if (!response.ok) {
       const message = `An error has occured: ${response.status}`;
       console.error(message);
     } else {
       data = await response.json();
-      // allIds = Array.from(new Set(data.result));
       allIds = data.result;
       quantityProduct = allIds.length;
     }
@@ -467,46 +464,37 @@ async function getFieldBrand() {
 
 //----------------------------функция рендера списка наименований
 function renderListName(list) {
-  let ul = document.createElement('ul');
-
   list.forEach(function (item) {
     let li = document.createElement('li');
     li.appendChild(document.createTextNode(item));
-    li.className = 'item_product';
+    li.className = 'listName_item';
     li.addEventListener('click', function () {
       filterByName(item);
     });
-    ul.appendChild(li);
+    productList.appendChild(li);
   });
-  productList.appendChild(ul);
 }
 //----------------------------функция рендера списка цен
 function renderListPrice(list) {
-  let ul = document.createElement('ul');
-
   list.forEach(function (item) {
     let li = document.createElement('li');
     li.appendChild(document.createTextNode(item));
-    li.className = 'item_price';
+    li.className = 'listPrice_item';
     li.addEventListener('click', function () {
       filterByPrice(item);
     });
-    ul.appendChild(li);
+    productList.appendChild(li);
   });
-  productList.appendChild(ul);
 }
 //----------------------------функция рендера списка брэндов
 function renderListBrand(list) {
-  let ul = document.createElement('ul');
-
   list.forEach(function (item) {
     let li = document.createElement('li');
     li.appendChild(document.createTextNode(item));
-    li.className = 'item_brand';
+    li.className = 'listBrand_item';
     li.addEventListener('click', function () {
       filterByBrand(item);
     });
-    ul.appendChild(li);
+    productList.appendChild(li);
   });
-  productList.appendChild(ul);
 }
