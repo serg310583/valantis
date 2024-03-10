@@ -132,9 +132,14 @@ function pagination(totalPages, currentPage) {
   let afterPages = currentPage + 1;
 
   if (currentPage > 1) {
-    liTag += `<li class="btn prev" onclick="pagination(${totalPages}, ${
-      currentPage - 1
-    })"><span><i class="fas fa-angle-left"></i>Prev</span></li>`;
+    liTag += `
+  <li class="btn prev" onclick="(() => {
+    const prevPage = ${currentPage - 1};
+    pagination(${totalPages}, prevPage);
+    getListIds(prevPage);
+  })()">
+    <span><i class="fas fa-angle-left"></i>Prev</span>
+  </li>`;
   }
   if (currentPage > 2) {
     liTag += `<li class="numb" onclick="pagination(${totalPages}, 1)"><span>1</span></li>`;
@@ -143,14 +148,12 @@ function pagination(totalPages, currentPage) {
     }
   }
 
-  //how many pages or li show before current li
   if (currentPage == totalPages) {
     beforePages = beforePages - 2;
   } else if (currentPage == 2) {
     afterPages = afterPages + 1;
   }
 
-  //how many pages or li show after current li
   if (currentPage == 1) {
     afterPages = afterPages + 2;
   } else if (currentPage == totalPages - 1) {
@@ -176,9 +179,14 @@ function pagination(totalPages, currentPage) {
   }
 
   if (currentPage < totalPages) {
-    liTag += `<li class="btn next" onclick="pagination(${totalPages}, ${
-      currentPage + 1
-    })"><span>Next<i class="fas fa-angle-right"></i></span></li>`;
+    liTag += `
+  <li class="btn next" onclick="(() => {
+    const nextPage = ${currentPage + 1};
+    pagination(${totalPages}, nextPage);
+    getListIds(nextPage);
+  })()">
+    <span>Next<i class="fas fa-angle-right"></i></span>
+  </li>`;
   }
   ulTag.innerHTML = liTag;
   clearList(productList);
